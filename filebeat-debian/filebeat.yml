@@ -1,0 +1,21 @@
+# Filebeat on Debian VM (ARM ok)
+filebeat.inputs:
+  - type: filestream
+    id: nginx-access
+    enabled: true
+    paths: ["/var/log/nginx/access.log"]
+
+  - type: filestream
+    id: nginx-error
+    enabled: true
+    paths: ["/var/log/nginx/error.log"]
+
+# Optional: helps setup dashboards if needed
+setup.kibana:
+  host: "http://192.168.1.2:5601"
+  username: "elastic"
+  password: "changeme"
+
+# Send to Logstash on the Mac (replace with your Mac/LAN IP if different)
+output.logstash:
+  hosts: ["192.168.1.2:5044"]
